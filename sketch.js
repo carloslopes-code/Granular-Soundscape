@@ -44,7 +44,7 @@ function setup() {
   sliderTime.style('width', '500px');
 
   //botão para iniciar a gravação
-  recordButton = createButton('click to record');
+  recordButton = createButton('click to record 10sec');
   recordButton.position(19, 19);
   recordButton.mousePressed(changeState);
 }
