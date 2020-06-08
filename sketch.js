@@ -158,7 +158,7 @@ function draw() {
         let midiNote = 69 + (((randY - (400 * 0.33)) / (400 * 0.33)) * -12);
         let rate = midiToFreq(midiNote) / 440.;
         for (i = 0; i < snd.length; i++) {
-          let panning = map(i, 0, snd.length - 1, -0.8, 0.8); //stereo
+          let panning = map(i, 0, snd.length - 1, -0.9, 0.9); //stereo
           snd[i].pan(panning);
           snd[i].play(0, rate, 0.0, (randX / 700) * snd[i].duration(), grainSize);
           myEnvelope.play(snd[i]);
