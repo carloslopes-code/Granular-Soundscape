@@ -233,7 +233,7 @@ function stopAudio() { //socorro
 
 function keyPressed() { //ainda obsoleto
   switch (key) {
-    case ' ':
+    case '@':
       for (i = 0; i < snd.length; i++) {
         if (snd[i] != null && snd[i].isLoaded()) {
           if (snd[i].isPlaying()) {
