@@ -3,7 +3,6 @@ let loaded = false;
 
 let snd = []; // array de sons do freesound
 let img = []; // imagem da waveform
-let sound, reverb;
 let fetchedSound; // last fetched freesound (obsoleto)
 
 let grainSize = 0.75; //criar representação gráfica
@@ -22,6 +21,7 @@ let recorder, soundFile;
 freesound.setToken("k0trCxU8nQfUM1UiXhai3m4ooewj1JE8XcsPuEiA");
 
 function setup() {
+  
   createCanvas(700, 525);
   cor = color(0);
   getAudioContext().suspend();
@@ -85,11 +85,9 @@ function draw() {
 
   background(cor);
   
-  for (i = 0; i < snd.length; i++) {
-        if (snd[i] != null && snd[i].isLoaded()) {
-          loaded = true;
-        }
-  }
+    if (snd.length == 3) {
+      loaded = true;
+    }
 
   switch (loaded) {
 
@@ -101,14 +99,14 @@ function draw() {
       break;
 
     case true:
-
-      for (i = 0; i < snd.length; i++) {
+      
+       for (i = 0; i < snd.length; i++) {
         if (snd[i] != null && snd[i].isLoaded()) {
           image(img[i], 0, i * (400 / 3), width, i + 1 * (400 / 3));
         } else {
           background(cor);
         }
-      }
+  }
 
       let pressing = false;
 
@@ -233,7 +231,7 @@ function stopAudio() { //socorro
 
 function keyPressed() { //ainda obsoleto
   switch (key) {
-    case '@':
+    case ' ':
       for (i = 0; i < snd.length; i++) {
         if (snd[i] != null && snd[i].isLoaded()) {
           if (snd[i].isPlaying()) {
