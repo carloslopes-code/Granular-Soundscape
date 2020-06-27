@@ -22,7 +22,7 @@ freesound.setToken("k0trCxU8nQfUM1UiXhai3m4ooewj1JE8XcsPuEiA");
 
 function setup() {
   
-  createCanvas(700, 525);
+  createCanvas(windowWidth, windowHeight); //700, 525
   cor = color(0);
   getAudioContext().suspend();
 
@@ -116,13 +116,13 @@ function draw() {
 
       let time = sliderTime.value();
       let pitch = sliderPitch.value();
-      randX = constrain(mouseX + random(-time, time), 0, 700 - 1);
+      randX = constrain(mouseX + random(-time, time), 0, windowWidth - 1);
       randY = constrain(mouseY + random(-pitch, pitch), 0, 400);
 
       noStroke();
       textSize(12);
       fill(255);
-      rect(0, 400, width, height);
+      rect(0, 400, windowWidth, windowHeight);
       noStroke();
       fill(60);
       text('Time-Point Randomizer', sliderTime.x, sliderTime.y);
@@ -131,16 +131,16 @@ function draw() {
       text('Pitch Randomizer', sliderPitch.x, sliderPitch.y);
       noStroke();
       fill(240);
-      rect(550, 400, width, height);
+      rect(windowWidth-150, 400, windowWidth, windowHeight);
       textSize(20);
       fill(0, 110, 180);
-      text('Granular Toys', 560, 425);
+      text('Granular Toys', windowWidth-140, 425);
       fill(0, 125, 170);
-      text('Granular Toys', 560, 455);
+      text('Granular Toys', windowWidth-140, 455);
       fill(0, 110, 153, 150);
-      text('Granular Toys', 560, 485);
+      text('Granular Toys', windowWidth-140, 485);
       fill(0, 110, 153, 75);
-      text('Granular Toys', 560, 515);
+      text('Granular Toys', windowWidth-140, 515);
 
       switch (recState) {
         case 0:
@@ -217,7 +217,7 @@ function granularPlay() {
     for (i = 0; i < snd.length; i++) {
       let panning = map(i, 0, snd.length - 1, -0.9, 0.9); //fake stereo
       snd[i].pan(panning);
-      snd[i].play(0, rate, 0.0, (randX / 700) * snd[i].duration(), grainSize);
+      snd[i].play(0, rate, 0.0, (randX / windowWidth) * snd[i].duration(), grainSize);
       myEnvelope.play(snd[i]);
       snd[i].onended(stopAudio);
     }
