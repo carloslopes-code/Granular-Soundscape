@@ -38,7 +38,7 @@ function setup() {
   let l1 = 1.0; // attack level 0.0 to 1.0
   let t2 = grainSize; // decay time in seconds
   let l2 = 0.0; // decay level  0.0 to 1.0
-  let t3 = grainSize; // Duration of the release portion of the envelope.
+  let t3 = 0.5; // Duration of the release portion of the envelope.
   let l3 = 0.0; // Level at the end of the release.
   myEnvelope = new p5.Envelope(t1, l1, t2, l2, t3, l3);
 
