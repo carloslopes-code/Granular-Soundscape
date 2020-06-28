@@ -125,7 +125,6 @@ function draw() {
       randX = constrain(mouseX + random(-time, time), 0, windowWidth - 1);
       randY = constrain(mouseY + random(-pitch, pitch), 0, 400);
       grainSize = constrain(grainSize, 0.01, 3);
-      print(grainSize);
       
 
       noStroke();
@@ -243,24 +242,8 @@ function granularPlay() {
   }
 }
 
-function stopAudio() { //socorro
+function stopAudio() {
   //snd.splice();
-}
-
-function keyPressed() { //ainda obsoleto
-  switch (key) {
-    case ' ':
-      for (i = 0; i < snd.length; i++) {
-        if (snd[i] != null && snd[i].isLoaded()) {
-          if (snd[i].isPlaying()) {
-            snd.stop();
-          }
-          snd[i] = null;
-          getRandomSimilar();
-        }
-        break;
-      }
-  }
 }
 
 function getFreeSound(soundID, num) {
@@ -279,6 +262,22 @@ function getFreeSound(soundID, num) {
       print("Sound could not be retrieved.")
     }
   );
+}
+
+function keyPressed() { //ainda obsoleto
+  switch (key) {
+    case ' ':
+      for (i = 0; i < snd.length; i++) {
+        if (snd[i] != null && snd[i].isLoaded()) {
+          if (snd[i].isPlaying()) {
+            snd.stop();
+          }
+          snd[i] = null;
+          getRandomSimilar();
+        }
+        break;
+      }
+  }
 }
 
 function getRandomSimilar() {
