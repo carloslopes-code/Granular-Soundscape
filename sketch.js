@@ -5,7 +5,7 @@ let snd = []; // array de sons do freesound
 let img = []; // imagem da waveform
 let fetchedSound; // last fetched freesound (obsoleto)
 
-let grainSize = 0.75; //criar representação gráfica
+let grainSize = 1; //criar representação gráfica
 let myEnvelope;
 let sliderTime, sliderPitch;
 let time, pitch;
@@ -13,7 +13,7 @@ let time, pitch;
 let lastGrain = 0;
 let grainInterval = 50;
 
-let recState = 0; //ainda não está bem implementado
+let recState = 0;
 let recordButton;
 
 let recorder, soundFile;
@@ -81,6 +81,12 @@ function changeState() {
   }
 }
 
+function mouseWheel(event) {
+
+  grainSize += event.delta/-1250;
+
+}
+
 function draw() {
 
   background(cor);
@@ -118,17 +124,31 @@ function draw() {
       let pitch = sliderPitch.value();
       randX = constrain(mouseX + random(-time, time), 0, windowWidth - 1);
       randY = constrain(mouseY + random(-pitch, pitch), 0, 400);
+      grainSize = constrain(grainSize, 0.01, 3);
+      print(grainSize);
+      
 
       noStroke();
-      textSize(12);
       fill(255);
       rect(0, 400, windowWidth, windowHeight);
+      
       noStroke();
+      textSize(20);
+      fill(60);
+      text(grainSize, windowWidth-250, 425);
+      noStroke();
+      textSize(12);
+      fill(60);
+      text('Grain Size', windowWidth-250, 445);
+      noStroke();
+      textSize(12);
       fill(60);
       text('Time-Point Randomizer', sliderTime.x, sliderTime.y);
       noStroke();
       fill(60);
       text('Pitch Randomizer', sliderPitch.x, sliderPitch.y);
+      
+      
       noStroke();
       fill(240);
       rect(windowWidth-150, 400, windowWidth, windowHeight);
@@ -141,6 +161,9 @@ function draw() {
       text('Granular Toys', windowWidth-140, 485);
       fill(0, 110, 153, 75);
       text('Granular Toys', windowWidth-140, 515);
+      fill(100);
+      textSize(14);
+      text('Carlos Lopes', windowWidth-115, 545);
 
       switch (recState) {
         case 0:
@@ -184,7 +207,7 @@ function draw() {
           ellipseMode(CENTER);
           noStroke();
           fill(100);
-          ellipse(mouseX, mouseY, 10, 10);
+          ellipse(mouseX, mouseY, 10*grainSize, 10*grainSize);
           break;
 
         case true:
@@ -194,16 +217,11 @@ function draw() {
           ellipseMode(CENTER);
           noStroke();
           fill(255, 0, 0);
-          ellipse(randX, randY, 20, 20);
+          ellipse(randX, randY, 15*grainSize, 15*grainSize);
 
           granularPlay();
 
       }
-
-
-
-
-
 
       break;
   }
